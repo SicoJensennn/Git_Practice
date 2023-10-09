@@ -1,0 +1,127 @@
+.loader {
+  --size: 8rem;
+  --duration: 4s;
+  position: relative;
+  isolation: isolate;
+  contain: content;
+  block-size: calc(var(--size) * .5);
+  inline-size: var(--size);
+  background-color: skyblue;
+  border-start-end-radius: calc(var(--size) * .5);
+  border-start-start-radius: calc(var(--size) * .5);
+}
+.loader::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  opacity: 0;
+  background-color: color-mix(in srgb, midnightblue 75%, rgba(0, 0, 0, 0.72));
+  -webkit-animation: background-darken var(--duration) linear infinite;
+          animation: background-darken var(--duration) linear infinite;
+}
+
+.sun,
+.moon {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  inline-size: var(--size);
+  aspect-ratio: 1;
+  -webkit-animation: rotate-sun-moon var(--duration) linear infinite;
+          animation: rotate-sun-moon var(--duration) linear infinite;
+}
+.sun::after,
+.moon::after {
+  position: absolute;
+  inset-inline: auto;
+  inline-size: calc(var(--size) * .1875);
+  aspect-ratio: 1;
+  content: "";
+  border-radius: 50%;
+}
+
+.sun::after {
+  inset-block-start: 6.25%;
+  background-color: yellow;
+}
+
+.moon::after {
+  inset-block-end: 6.25%;
+  background-color: lightyellow;
+}
+
+@-webkit-keyframes background-darken {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.96;
+  }
+}
+
+@keyframes background-darken {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.96;
+  }
+}
+@-webkit-keyframes rotate-sun-moon {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: -360deg;
+  }
+}
+@keyframes rotate-sun-moon {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: -360deg;
+  }
+}
+html {
+  box-sizing: border-box;
+  block-size: 100vh;
+  font-size: 100%;
+  line-height: 1.5;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  min-block-size: 100%;
+  font-family: "Poppins", sans-serif;
+  color: #181818;
+  background-color: #eee;
+}
+
+.msr,
+.material-symbols-rounded {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-variation-settings: "FILL" var(--msr-fill, 1), "wght" var(--msr-wght, 400), "GRAD" var(--msr-grade, 0), "opsz" var(--msr-opsz, 24);
+}
+
+.msr {
+  font-family: "Material Symbols Rounded";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -moz-font-feature-settings: "liga";
+  -moz-osx-font-smoothing: grayscale;
+}
